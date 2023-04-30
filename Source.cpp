@@ -67,9 +67,6 @@ double GetMo2(double a, double b, double c, double d, int variant)
 		return b / (a - 1) + c;
 
 
-
-
-
 	if (variant == 21)//A - - -
 		return a;
 
