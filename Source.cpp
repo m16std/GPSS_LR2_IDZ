@@ -60,8 +60,27 @@ double GetMo2(double a, double b, double c, double d, int variant)
 	if (variant == 17)//u - - -
 		return a;
 
-	if (variant == 18)//A - - -
+	if (variant == 18)//b A - -
+		return (a*b)/(a-1);
+
+	if (variant == 19)//a b A -
+		return b / (a - 1) + c;
+
+
+
+
+
+	if (variant == 21)//A - - -
 		return a;
+
+	if (variant == 22)//a b c -
+		return (a+b+c)/3;
+
+	if (variant == 23)//a b - -
+		return ( a + b ) / 2;
+
+	if (variant == 24)//a b A -
+		return b/a* tgamma(1/a)+c;
 }
 
 double FindMo2(double x, int variant)
