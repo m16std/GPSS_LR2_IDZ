@@ -64,8 +64,6 @@ double GetMo2(double a, double b, double c, double d, int variant)
 
 void PrintP2(double a, double b, double c, double d, int variant)
 {
-	cout << "\n\n";
-
 	if (variant == 1)//A1 A1 a1 a2
 		cout << "BETA(1, " << a << ", " << b << ", " << c << ", " << d << ")";
 
@@ -135,7 +133,6 @@ double FindMo2(double x, int variant)
 					delta = abs(x - GetMo2(a, b, c, d, variant));
 					if (delta < 0.1)
 					{
-						cout << "\nMo2 = " << GetMo2(a, b, c, d, variant);
 						PrintP2(a, b, c, d, variant);
 						return GetMo2(a, b, c, d, variant);
 					}
@@ -153,7 +150,6 @@ double GetMo1(double d, double e, vector<double> d1, vector<double> e1, vector<d
 		interval = (d1[i + 1] * d + e1[i + 1] * e) / k1[i + 1] - (d1[i] * d + e1[i] * e) / k1[i];
 		Mo1 += (y1[i] + y1[i + 1]) / 2.0 * interval;
 	}
-	cout << "\nMo1 = " << Mo1;
 	return Mo1;
 }
 
@@ -200,8 +196,10 @@ double GetP1(double x, double d, double e, vector<double> d1, vector<double> e1,
 	return right_y * betwen_x_and_left_x / interval + left_y * (interval - betwen_x_and_left_x) / interval;
 }
 
-void GetP0(double Mo0_a, double Mo0_x, vector<double> a0, vector<double> x0, vector<double> P0, double Mo1, double Mo2)
+double GetP0(vector<double> a0, vector<double> x0, vector<double> P0, double Mo1, double Mo2)
 {
+	double Mo0_a = 0, Mo0_x = 0;
+
 	for (int i = 0; i < a0.size(); i++)
 	{
 		Mo0_a += a0[i] * P0[i];
@@ -219,11 +217,13 @@ void GetP0(double Mo0_a, double Mo0_x, vector<double> a0, vector<double> x0, vec
 		P += P0[i];
 		cout << P << ", " << a0[i] * a + x0[i] << "/\n";
 	}
+
+	return a;
 }
 
 void PrintP1(double step, double Mo1, double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> Y1)
 {
-	cout << "\n\n";
+	cout << "\n";
 
 	double P = 0;
 	for (double i = 0; i < 22 + step; i += step)

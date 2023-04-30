@@ -23,15 +23,17 @@ int main()
 	if (a0.size() != x0.size() || d1.size() != e1.size() || e1.size() != k1.size() || k1.size() != Y1.size())
 		return 0;
 
-	double Mo1 = 0, Mo2 = 0, Mo0_a = 0, Mo0_x = 0;
+	double Mo1, Mo2, a;
 
 	Mo1 = GetMo1(0, 22, d1, e1, k1, Y1);
 
-	Mo2 = FindMo2(Mo1 / 2.1, variant);
+	Mo2 = FindMo2(Mo1 / 2.3, variant);
 
-	GetP0(Mo0_a, Mo0_x, a0, x0, P0, Mo1, Mo2);
+	a = GetP0(a0, x0, P0, Mo1, Mo2);
 
 	PrintP1(0.001, Mo1, 0, 22, d1, e1, k1, Y1);
+
+	cout << "\nMo(P1) = " << Mo1 << "\nMo(P2) = " << Mo2 << "\na = " << a << "\n";
 
 	return 1;
 }
