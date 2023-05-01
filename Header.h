@@ -206,8 +206,9 @@ double GetP0(vector<double> a0, vector<double> x0, vector<double> P0, double Mo1
 		Mo0_x += x0[i] * P0[i];
 	}
 
-	double a = 0;
-	a = 0.87 / (Mo0_a * (1.0 / Mo1 + 1.0 / Mo2)) - Mo0_x;
+	double a, Mo0;
+	Mo0 = 0.87 / (1.0 / Mo1 + 1.0 / Mo2);
+	a = (Mo0 - Mo0_x)/ Mo0_a;
 
 	//cout << "a = " << a << "\n\n";
 
