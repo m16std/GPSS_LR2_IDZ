@@ -19,11 +19,15 @@ int main()
 	vector<double> k1 = { 1,5,5,5,5,1 };
 	vector<double> Y1 = { 1,1,0,0,2,2 };
 
+	double bd = 0;
+	double ce = 22;
+	double Mo1DivMo2 = 2.5;
+
 	/*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 
 	int HandWrite, count3;
 
-	cout << "¬водим значени€ вручную или берЄм заготовленные? ";
+	cout << "¬водим значени€ вручную? ";
 	cin >> HandWrite;
 
 	if (HandWrite == 1)
@@ -60,15 +64,17 @@ int main()
 		}
 	}
 
-	double Mo1, Mo2, a;
+	double Mo1, Mo2, a, S1;
 
-	Mo1 = GetMo1(0, 22, d1, e1, k1, Y1);
+	S1 = GetS1(bd, ce, d1, e1, k1, Y1);
 
-	Mo2 = FindMo2(Mo1 / 2.3, variant);
+	Mo1 = GetMo1(S1, bd, ce, d1, e1, k1, Y1);
+
+	Mo2 = FindMo2(Mo1 / Mo1DivMo2, variant);
 
 	a = GetP0(a0, x0, P0, Mo1, Mo2);
 
-	PrintP1(0.001, Mo1, 0, 22, d1, e1, k1, Y1);
+	PrintP1(S1, bd, ce, d1, e1, k1, Y1);
 
 	cout << "\nMo(P1) = " << Mo1 << "\nMo(P2) = " << Mo2 << "\na = " << a << "\n";
 

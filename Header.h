@@ -142,15 +142,15 @@ double FindMo2(double x, int variant)
 	}
 }
 
-double GetMo1(double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> y1)
+double GetS1(double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> y1)
 {
-	double interval, Mo1 = 0;
+	double interval, S1 = 0;
 	for (int i = 0; i < d1.size() - 1; i++)
 	{
 		interval = (d1[i + 1] * d + e1[i + 1] * e) / k1[i + 1] - (d1[i] * d + e1[i] * e) / k1[i];
-		Mo1 += (y1[i] + y1[i + 1]) / 2.0 * interval;
+		S1 += (y1[i] + y1[i + 1]) / 2.0 * interval;
 	}
-	return Mo1;
+	return S1;
 }
 
 double GetP1(double x, double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> y1)
@@ -221,16 +221,33 @@ double GetP0(vector<double> a0, vector<double> x0, vector<double> P0, double Mo1
 	return a;
 }
 
-void PrintP1(double step, double Mo1, double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> Y1)
+void PrintP1(double S1, double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> Y1)
 {
 	cout << "\n";
 
-	double P = 0;
-	for (double i = 0; i < 22 + step; i += step)
+	double P = 0, step = 0.001;
+	for (double i = d; i < e + step; i += step)
 	{
 		if (fmod(i, 1) < step / 2 || fmod(i, 1) > 1 - step / 2)
 			cout << i << ", " << P << "/\n";
-		P += GetP1(i, 0, 22, d1, e1, k1, Y1) * step / Mo1;
+		P += GetP1(i, d, e, d1, e1, k1, Y1) * step / S1;
 	}
 
+}
+
+double GetMo1(double S1, double d, double e, vector<double> d1, vector<double> e1, vector<double> k1, vector<double> Y1)
+{
+	cout << "\n";
+
+	double P = 0, step = 0.001, Mo1 = 0, best = 100;
+	for (double i = d; i < e + step; i += step)
+	{
+		P += GetP1(i, d, e, d1, e1, k1, Y1) * step / S1;
+		if (abs(P - 0.5) < best)
+		{
+			best = abs(P - 0.5);
+			Mo1 = i;
+		}
+	}
+	return Mo1;
 }
